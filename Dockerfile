@@ -1,6 +1,6 @@
 # clean base image containing only comfyui, comfy-cli and comfyui-manager
 # FROM runpod/worker-comfyui:5.8.4-base
-FROM runpod/worker-comfyui:5.8.5-base-cuda12.8.1
+FROM runpod/worker-comfyui:5.8.4-base-cuda12.8.1
 
 # Force correct PyTorch for Blackwell BEFORE any node installs
 RUN pip install \
@@ -17,7 +17,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     ffmpeg \
  && rm -rf /var/lib/apt/lists/*
 
-
+RUN git clone https://github.com/Lightricks/ComfyUI-LTXVideo \
+    /comfyui/custom_nodes/ComfyUI-LTXVideo && \
+    cd /comfyui/custom_nodes/ComfyUI-LTXVideo && \
+    pip install --no-cache-dir -r requirements.txt
 
 # install custom nodes into comfyui
 RUN git clone https://github.com/1038lab/ComfyUI-QwenVL /comfyui/custom_nodes/ComfyUI-QwenVL && \
@@ -40,11 +43,13 @@ RUN git clone https://github.com/ClownsharkBatwing/RES4LYF /comfyui/custom_nodes
     cd /comfyui/custom_nodes/RES4LYF && \
     pip install --no-cache-dir -r requirements.txt
 
-# point comfyui at the network volume for all model types
-# models are stored on the network volume at /runpod-volume/models/
-COPY extra_model_paths.yaml /comfyui/extra_model_paths.yaml
+
 
 RUN pip install \
     torch==2.8.0 torchvision torchaudio \
     --index-url https://download.pytorch.org/whl/cu128 \
     --upgrade
+
+    # point comfyui at the network volume for all model types
+# models are stored on the network volume at /runpod-volume/models/
+COPY extra_model_paths.yaml /comfyui/extra_model_paths.yaml
