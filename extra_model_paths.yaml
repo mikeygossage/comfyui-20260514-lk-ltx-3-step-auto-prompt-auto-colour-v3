@@ -5,3 +5,4 @@ runpod_volume:
   loras: models/loras/
   vae: models/vae/
   upscale_models: models/upscale_models/
+  llm: models/LLM/
