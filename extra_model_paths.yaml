@@ -1,0 +1,7 @@
+runpod_volume:
+  base_path: /runpod-volume/
+  checkpoints: models/checkpoints/
+  text_encoders: models/text_encoders/
+  loras: models/loras/
+  vae: models/vae/
+  upscale_models: models/upscale_models/
