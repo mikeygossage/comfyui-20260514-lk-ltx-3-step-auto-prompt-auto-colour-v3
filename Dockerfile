@@ -1,6 +1,6 @@
 # clean base image containing only comfyui, comfy-cli and comfyui-manager
 # FROM runpod/worker-comfyui:5.8.4-base
-FROM runpod/worker-comfyui:5.4.1-base-cuda12.8.1
+FROM runpod/worker-comfyui:5.4.8-base-cuda12.8.1
 
 # build-time tokens for gated downloads — never baked into final image.
 # pass via: docker build --build-arg HF_TOKEN=$HF_TOKEN ...
@@ -29,6 +29,10 @@ RUN git clone https://github.com/kijai/ComfyUI-KJNodes /comfyui/custom_nodes/Com
 RUN comfy node install --exit-on-fail was-ns@3.0.1 || \
     (echo "WARN: was-ns@3.0.1 unavailable, falling back to latest" >&2 && \
     comfy node install --exit-on-fail was-ns)
+
+RUN git clone https://github.com/ClownsharkBatwing/RES4LYF /comfyui/custom_nodes/RES4LYF && \
+    cd /comfyui/custom_nodes/RES4LYF && \
+    pip install --no-cache-dir -r requirements.txt
 
 # point comfyui at the network volume for all model types
 # models are stored on the network volume at /runpod-volume/models/
