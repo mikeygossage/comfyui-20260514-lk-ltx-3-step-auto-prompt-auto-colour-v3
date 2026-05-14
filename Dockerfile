@@ -5,8 +5,6 @@ FROM runpod/worker-comfyui:5.8.4-base
 # pass via: docker build --build-arg HF_TOKEN=$HF_TOKEN ...
 ARG HF_TOKEN=""
 
-# inside your image build
-RUN pip install --no-cache-dir llama-cpp-python
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     ffmpeg \
