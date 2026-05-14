@@ -5,6 +5,15 @@ FROM runpod/worker-comfyui:5.8.4-base
 # pass via: docker build --build-arg HF_TOKEN=$HF_TOKEN ...
 ARG HF_TOKEN=""
 
+# inside your image build
+RUN pip install --no-cache-dir llama-cpp-python
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    ffmpeg \
+ && rm -rf /var/lib/apt/lists/*
+
+
+
 # install custom nodes into comfyui
 RUN git clone https://github.com/1038lab/ComfyUI-QwenVL /comfyui/custom_nodes/ComfyUI-QwenVL && \
     cd /comfyui/custom_nodes/ComfyUI-QwenVL && \
