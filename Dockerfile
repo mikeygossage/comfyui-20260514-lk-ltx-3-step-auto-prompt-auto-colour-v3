@@ -6,7 +6,7 @@ FROM runpod/worker-comfyui:5.8.4-base
 ARG HF_TOKEN=""
 
 # install custom nodes into comfyui
-RUN git clone https://github.com/ComfyUI-Qwen/ComfyUI-QwenVL /comfyui/custom_nodes/ComfyUI-QwenVL && \
+RUN git clone https://github.com/1038lab/ComfyUI-QwenVL /comfyui/custom_nodes/ComfyUI-QwenVL && \
     cd /comfyui/custom_nodes/ComfyUI-QwenVL && \
     pip install --no-cache-dir -r requirements.txt
 
