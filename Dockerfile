@@ -1,6 +1,11 @@
 # clean base image containing only comfyui, comfy-cli and comfyui-manager
 # FROM runpod/worker-comfyui:5.8.4-base
-FROM runpod/worker-comfyui:5.8.5-base-cuda12.8.1
+FROM runpod/worker-comfyui:5.8.4-base-cuda12.8.1
+
+# Force correct PyTorch for Blackwell BEFORE any node installs
+RUN pip uninstall torch torchvision torchaudio -y && \
+    pip install torch==2.7.0 torchvision==0.22.0 torchaudio==2.7.0 \
+    --index-url https://download.pytorch.org/whl/cu128 --no-deps
 
 # build-time tokens for gated downloads — never baked into final image.
 # pass via: docker build --build-arg HF_TOKEN=$HF_TOKEN ...
