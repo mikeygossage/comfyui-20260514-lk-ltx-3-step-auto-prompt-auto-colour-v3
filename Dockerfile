@@ -1,6 +1,6 @@
 # clean base image containing only comfyui, comfy-cli and comfyui-manager
 # FROM runpod/worker-comfyui:5.8.4-base
-FROM runpod/worker-comfyui:5.4.8-base-cuda12.8.1
+FROM runpod/worker-comfyui:5.8.5-base-cuda12.8.1
 
 # build-time tokens for gated downloads — never baked into final image.
 # pass via: docker build --build-arg HF_TOKEN=$HF_TOKEN ...
