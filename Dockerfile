@@ -1,11 +1,12 @@
 # clean base image containing only comfyui, comfy-cli and comfyui-manager
 # FROM runpod/worker-comfyui:5.8.4-base
-FROM runpod/worker-comfyui:5.8.4-base-cuda12.8.1
+FROM runpod/worker-comfyui:5.8.5-base-cuda12.8.1
 
 # Force correct PyTorch for Blackwell BEFORE any node installs
-RUN pip uninstall torch torchvision torchaudio -y && \
-    pip install torch==2.7.0 torchvision==0.22.0 torchaudio==2.7.0 \
-    --index-url https://download.pytorch.org/whl/cu128 --no-deps
+RUN pip install \
+    torch==2.8.0 torchvision torchaudio \
+    --index-url https://download.pytorch.org/whl/cu128 \
+    --upgrade
 
 # build-time tokens for gated downloads — never baked into final image.
 # pass via: docker build --build-arg HF_TOKEN=$HF_TOKEN ...
@@ -42,3 +43,8 @@ RUN git clone https://github.com/ClownsharkBatwing/RES4LYF /comfyui/custom_nodes
 # point comfyui at the network volume for all model types
 # models are stored on the network volume at /runpod-volume/models/
 COPY extra_model_paths.yaml /comfyui/extra_model_paths.yaml
+
+RUN pip install \
+    torch==2.8.0 torchvision torchaudio \
+    --index-url https://download.pytorch.org/whl/cu128 \
+    --upgrade
