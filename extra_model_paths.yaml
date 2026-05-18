@@ -4,5 +4,5 @@ runpod_volume:
   text_encoders: models/text_encoders/
   loras: models/loras/
   vae: models/vae/
-  upscale_models: models/upscale_models/
+  upscale_models: models/latent_upscale_models/
   llm: models/LLM/
