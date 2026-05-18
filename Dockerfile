@@ -7,7 +7,7 @@ FROM runpod/worker-comfyui:5.8.4-base
 #    torch==2.8.0 torchvision torchaudio \
 #    --index-url https://download.pytorch.org/whl/cu128 \
 #    --upgrade
-
+RUN pip install xformers
 # build-time tokens for gated downloads — never baked into final image.
 # pass via: docker build --build-arg HF_TOKEN=$HF_TOKEN ...
 ARG HF_TOKEN=""
@@ -42,7 +42,9 @@ RUN comfy node install --exit-on-fail was-ns@3.0.1 || \
 #RUN git clone https://github.com/ClownsharkBatwing/RES4LYF /comfyui/custom_nodes/RES4LYF && \
 #    cd /comfyui/custom_nodes/RES4LYF && \
 #    pip install --no-cache-dir -r requirements.txt
-
+#RUN mkdir -p /comfyui/models/latent_upscale_models && \
+#    wget -q -O /comfyui/models/latent_upscale_models/ltx-2.3-spatial-upscaler-x2-1.0.safetensors \
+#    "https://huggingface.co/Lightricks/LTX-2.3/resolve/main/ltx-2.3-spatial-upscaler-x2-1.0.safetensors"
 
 
 #RUN pip install \
