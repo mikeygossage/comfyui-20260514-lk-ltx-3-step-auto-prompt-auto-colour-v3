@@ -19,7 +19,7 @@ RUN pip install --upgrade \
 
 # SageAttention must be installed AFTER the correct torch is in place
 # so it compiles its CUDA kernels against cu130
-RUN pip install sageattention
+RUN pip install sageattention==2.2.0 --no-build-isolation
 
 
 
