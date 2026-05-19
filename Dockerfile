@@ -2,12 +2,14 @@
 FROM runpod/worker-comfyui:5.8.4-base
 #FROM runpod/worker-comfyui:5.8.4-base-cuda12.8.1
 
+ENV COMFY_ARGS="--use-sage-attention"
+
 # Force correct PyTorch for Blackwell BEFORE any node installs
 #RUN pip install \
 #    torch==2.8.0 torchvision torchaudio \
 #    --index-url https://download.pytorch.org/whl/cu128 \
 #    --upgrade
-RUN pip install xformers
+RUN pip install xformers sageattention
 # build-time tokens for gated downloads — never baked into final image.
 # pass via: docker build --build-arg HF_TOKEN=$HF_TOKEN ...
 ARG HF_TOKEN=""
