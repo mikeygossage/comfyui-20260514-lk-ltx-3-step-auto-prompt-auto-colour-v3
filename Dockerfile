@@ -13,9 +13,9 @@ FROM runpod/worker-comfyui:5.8.4-base
 
 # Upgrade PyTorch to CUDA 13.0 (stable as of torch 2.12)
 # Must happen before SageAttention or any node that pulls torch deps
-RUN pip install --upgrade \
-    torch==2.12.0 torchvision torchaudio \
-    --index-url https://download.pytorch.org/whl/cu130
+#RUN pip install --upgrade \
+#    torch==2.12.0 torchvision torchaudio \
+#    --index-url https://download.pytorch.org/whl/cu130
 
 # SageAttention must be installed AFTER the correct torch is in place
 # so it compiles its CUDA kernels against cu130
@@ -55,9 +55,9 @@ RUN comfy node install --exit-on-fail was-ns@3.0.1 || \
     (echo "WARN: was-ns@3.0.1 unavailable, falling back to latest" >&2 && \
     comfy node install --exit-on-fail was-ns)
 
-RUN git clone https://github.com/ClownsharkBatwing/RES4LYF /comfyui/custom_nodes/RES4LYF && \
-    cd /comfyui/custom_nodes/RES4LYF && \
-    pip install --no-cache-dir -r requirements.txt
+#RUN git clone https://github.com/ClownsharkBatwing/RES4LYF /comfyui/custom_nodes/RES4LYF && \
+#    cd /comfyui/custom_nodes/RES4LYF && \
+#    pip install --no-cache-dir -r requirements.txt
 
 #RUN mkdir -p /comfyui/models/latent_upscale_models && \
 #    wget -q -O /comfyui/models/latent_upscale_models/ltx-2.3-spatial-upscaler-x2-1.0.safetensors \
