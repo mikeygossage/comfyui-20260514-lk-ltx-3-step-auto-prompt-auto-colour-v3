@@ -9,7 +9,21 @@ ENV COMFY_ARGS="--use-sage-attention"
 #    torch==2.8.0 torchvision torchaudio \
 #    --index-url https://download.pytorch.org/whl/cu128 \
 #    --upgrade
-RUN pip install xformers sageattention
+#RUN pip install xformers sageattention
+
+# Upgrade PyTorch to CUDA 13.0 (stable as of torch 2.12)
+# Must happen before SageAttention or any node that pulls torch deps
+RUN pip install --upgrade \
+    torch==2.12.0 torchvision torchaudio \
+    --index-url https://download.pytorch.org/whl/cu130
+
+# SageAttention must be installed AFTER the correct torch is in place
+# so it compiles its CUDA kernels against cu130
+RUN pip install sageattention
+
+
+
+
 # build-time tokens for gated downloads — never baked into final image.
 # pass via: docker build --build-arg HF_TOKEN=$HF_TOKEN ...
 ARG HF_TOKEN=""
