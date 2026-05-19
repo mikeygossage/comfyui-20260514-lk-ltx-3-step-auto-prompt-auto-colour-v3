@@ -2,7 +2,7 @@
 FROM runpod/worker-comfyui:5.8.4-base
 #FROM runpod/worker-comfyui:5.8.4-base-cuda12.8.1
 
-ENV COMFY_ARGS="--use-sage-attention"
+# ENV COMFY_ARGS="--use-sage-attention"
 
 # Force correct PyTorch for Blackwell BEFORE any node installs
 #RUN pip install \
@@ -19,7 +19,7 @@ RUN pip install --upgrade \
 
 # SageAttention must be installed AFTER the correct torch is in place
 # so it compiles its CUDA kernels against cu130
-RUN pip install sageattention==2.2.0 --no-build-isolation
+# RUN pip install sageattention
 
 
 
@@ -55,9 +55,10 @@ RUN comfy node install --exit-on-fail was-ns@3.0.1 || \
     (echo "WARN: was-ns@3.0.1 unavailable, falling back to latest" >&2 && \
     comfy node install --exit-on-fail was-ns)
 
-#RUN git clone https://github.com/ClownsharkBatwing/RES4LYF /comfyui/custom_nodes/RES4LYF && \
-#    cd /comfyui/custom_nodes/RES4LYF && \
-#    pip install --no-cache-dir -r requirements.txt
+RUN git clone https://github.com/ClownsharkBatwing/RES4LYF /comfyui/custom_nodes/RES4LYF && \
+    cd /comfyui/custom_nodes/RES4LYF && \
+    pip install --no-cache-dir -r requirements.txt
+
 #RUN mkdir -p /comfyui/models/latent_upscale_models && \
 #    wget -q -O /comfyui/models/latent_upscale_models/ltx-2.3-spatial-upscaler-x2-1.0.safetensors \
 #    "https://huggingface.co/Lightricks/LTX-2.3/resolve/main/ltx-2.3-spatial-upscaler-x2-1.0.safetensors"
