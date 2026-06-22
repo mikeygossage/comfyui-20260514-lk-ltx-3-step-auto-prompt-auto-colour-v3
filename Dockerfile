@@ -55,9 +55,9 @@ RUN comfy node install --exit-on-fail was-ns@3.0.1 || \
     (echo "WARN: was-ns@3.0.1 unavailable, falling back to latest" >&2 && \
     comfy node install --exit-on-fail was-ns)
 
-#RUN git clone https://github.com/ClownsharkBatwing/RES4LYF /comfyui/custom_nodes/RES4LYF && \
-#    cd /comfyui/custom_nodes/RES4LYF && \
-#    pip install --no-cache-dir -r requirements.txt
+RUN git clone https://github.com/ClownsharkBatwing/RES4LYF /comfyui/custom_nodes/RES4LYF && \
+    cd /comfyui/custom_nodes/RES4LYF && \
+    pip install --no-cache-dir -r requirements.txt
 
 #RUN mkdir -p /comfyui/models/latent_upscale_models && \
 #    wget -q -O /comfyui/models/latent_upscale_models/ltx-2.3-spatial-upscaler-x2-1.0.safetensors \
