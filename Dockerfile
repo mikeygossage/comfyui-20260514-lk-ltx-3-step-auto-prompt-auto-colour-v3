@@ -63,20 +63,20 @@ RUN git clone https://github.com/ClownsharkBatwing/RES4LYF /comfyui/custom_nodes
 #    wget -q -O /comfyui/models/latent_upscale_models/ltx-2.3-spatial-upscaler-x2-1.0.safetensors \
 #    "https://huggingface.co/Lightricks/LTX-2.3/resolve/main/ltx-2.3-spatial-upscaler-x2-1.0.safetensors"
 
-RUN mkdir -p /comfyui/models/checkpoints \
-             /comfyui/models/text_encoders \
-             /comfyui/models/vae && \
-    wget -q --header="Authorization: Bearer ${HF_TOKEN}" \
-         -O /comfyui/models/checkpoints/ltx-2.3-22b-dev.safetensors \
-         "https://huggingface.co/Lightricks/LTX-2.3/resolve/main/ltx-2.3-22b-dev.safetensors" && \
-    wget -q --header="Authorization: Bearer ${HF_TOKEN}" \
-         -O /comfyui/models/text_encoders/ltx-2.3-22b-dev_embeddings_connectors.safetensors \
-         "https://huggingface.co/Lightricks/LTX-2.3/resolve/main/ltx-2.3-22b-dev_embeddings_connectors.safetensors" && \
-    wget -q --header="Authorization: Bearer ${HF_TOKEN}" \
-         -O /comfyui/models/vae/ltx-2.3-22b-dev_audio_vae.safetensors \
-         "https://huggingface.co/Lightricks/LTX-2.3/resolve/main/ltx-2.3-22b-dev_audio_vae.safetensors" && \
-    wget -q --header="Authorization: Bearer ${HF_TOKEN}" \
-         -O /comfyui/models/text_encoders/gemma_3_12B_it_fp8_e4m3fn.safetensors \
+RUN mkdir -p /comfyui/models/checkpoints && \
+    wget -q -O /comfyui/models/checkpoints/ltx-2.3-22b-dev.safetensors \
+         "https://huggingface.co/Lightricks/LTX-2.3/resolve/main/ltx-2.3-22b-dev.safetensors"
+
+RUN mkdir -p /comfyui/models/text_encoders && \
+    wget -q -O /comfyui/models/text_encoders/ltx-2.3-22b-dev_embeddings_connectors.safetensors \
+         "https://huggingface.co/Lightricks/LTX-2.3/resolve/main/ltx-2.3-22b-dev_embeddings_connectors.safetensors"
+
+RUN mkdir -p /comfyui/models/vae && \
+    wget -q -O /comfyui/models/vae/ltx-2.3-22b-dev_audio_vae.safetensors \
+         "https://huggingface.co/Lightricks/LTX-2.3/resolve/main/ltx-2.3-22b-dev_audio_vae.safetensors"
+
+RUN mkdir -p /comfyui/models/text_encoders && \
+    wget -q -O /comfyui/models/text_encoders/gemma_3_12B_it_fp8_e4m3fn.safetensors \
          "https://huggingface.co/GitMylo/LTX-2-comfy_gemma_fp8_e4m3fn/resolve/main/gemma_3_12B_it_fp8_e4m3fn.safetensors"
 
 
