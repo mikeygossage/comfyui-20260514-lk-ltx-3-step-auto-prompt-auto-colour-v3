@@ -68,9 +68,9 @@ RUN mkdir -p /comfyui/models/checkpoints && \
          "https://huggingface.co/Lightricks/LTX-2.3/resolve/main/ltx-2.3-22b-dev.safetensors"
 
 
-RUN mkdir -p /comfyui/models/text_encoders && \
-    wget -q -O /comfyui/models/text_encoders/gemma_3_12B_it_fp8_e4m3fn.safetensors \
-         "https://huggingface.co/GitMylo/LTX-2-comfy_gemma_fp8_e4m3fn/resolve/main/gemma_3_12B_it_fp8_e4m3fn.safetensors"
+#RUN mkdir -p /comfyui/models/text_encoders && \
+#    wget -q -O /comfyui/models/text_encoders/gemma_3_12B_it_fp8_e4m3fn.safetensors \
+#         "https://huggingface.co/GitMylo/LTX-2-comfy_gemma_fp8_e4m3fn/resolve/main/gemma_3_12B_it_fp8_e4m3fn.safetensors"
 
 
 #RUN pip install \
