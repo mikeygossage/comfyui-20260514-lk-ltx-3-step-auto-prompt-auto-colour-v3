@@ -67,13 +67,6 @@ RUN mkdir -p /comfyui/models/checkpoints && \
     wget -q -O /comfyui/models/checkpoints/ltx-2.3-22b-dev.safetensors \
          "https://huggingface.co/Lightricks/LTX-2.3/resolve/main/ltx-2.3-22b-dev.safetensors"
 
-RUN mkdir -p /comfyui/models/text_encoders && \
-    wget -q -O /comfyui/models/text_encoders/ltx-2.3-22b-dev_embeddings_connectors.safetensors \
-         "https://huggingface.co/Lightricks/LTX-2.3/resolve/main/ltx-2.3-22b-dev_embeddings_connectors.safetensors"
-
-RUN mkdir -p /comfyui/models/vae && \
-    wget -q -O /comfyui/models/vae/ltx-2.3-22b-dev_audio_vae.safetensors \
-         "https://huggingface.co/Lightricks/LTX-2.3/resolve/main/ltx-2.3-22b-dev_audio_vae.safetensors"
 
 RUN mkdir -p /comfyui/models/text_encoders && \
     wget -q -O /comfyui/models/text_encoders/gemma_3_12B_it_fp8_e4m3fn.safetensors \
