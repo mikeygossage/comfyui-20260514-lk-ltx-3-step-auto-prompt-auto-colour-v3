@@ -35,5 +35,3 @@ jobs:
             ${{ secrets.DOCKERHUB_USERNAME }}/ltx23-comfyui:${{ github.sha }}
           build-args: |
             HF_TOKEN=${{ secrets.HF_TOKEN }}
-          cache-from: type=local,src=C:/docker-cache
-          cache-to: type=local,dest=C:/docker-cache,mode=max
