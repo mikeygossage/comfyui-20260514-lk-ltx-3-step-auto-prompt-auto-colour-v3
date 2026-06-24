@@ -27,6 +27,8 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: .
+          build-contexts: |
+            localmodels=D:/ai/ComfyUI_APR2026/ComfyUI/models
           push: true
           tags: |
             ${{ secrets.DOCKERHUB_USERNAME }}/ltx23-comfyui:latest

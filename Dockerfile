@@ -63,9 +63,7 @@ RUN git clone https://github.com/ClownsharkBatwing/RES4LYF /comfyui/custom_nodes
 #    wget -q -O /comfyui/models/latent_upscale_models/ltx-2.3-spatial-upscaler-x2-1.0.safetensors \
 #    "https://huggingface.co/Lightricks/LTX-2.3/resolve/main/ltx-2.3-spatial-upscaler-x2-1.0.safetensors"
 
-RUN mkdir -p /comfyui/models/checkpoints && \
-    wget -q -O /comfyui/models/checkpoints/ltx-2.3-22b-dev.safetensors \
-         "https://huggingface.co/Lightricks/LTX-2.3/resolve/main/ltx-2.3-22b-dev.safetensors"
+COPY --from=localmodels checkpoints/ltx-2.3-22b-dev.safetensors /comfyui/models/checkpoints/ltx-2.3-22b-dev.safetensors
 
 
 #RUN mkdir -p /comfyui/models/text_encoders && \
