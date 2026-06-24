@@ -39,25 +39,52 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 #    pip install --no-cache-dir -r requirements.txt
 
 # install custom nodes into comfyui
-RUN git clone https://github.com/1038lab/ComfyUI-QwenVL /comfyui/custom_nodes/ComfyUI-QwenVL && \
+RUN for i in 1 2 3; do \
+      timeout 120 git clone https://github.com/1038lab/ComfyUI-QwenVL /comfyui/custom_nodes/ComfyUI-QwenVL && break; \
+      rm -rf /comfyui/custom_nodes/ComfyUI-QwenVL; \
+      [ $i -lt 3 ] && sleep 15 || exit 1; \
+    done && \
     cd /comfyui/custom_nodes/ComfyUI-QwenVL && \
-    pip install --no-cache-dir -r requirements.txt
+    for i in 1 2 3; do \
+      timeout 300 pip install --no-cache-dir --timeout 60 -r requirements.txt && break; \
+      [ $i -lt 3 ] && sleep 15 || exit 1; \
+    done
 
-RUN git clone https://github.com/kijai/ComfyUI-KJNodes /comfyui/custom_nodes/ComfyUI-KJNodes && \
+RUN for i in 1 2 3; do \
+      timeout 120 git clone https://github.com/kijai/ComfyUI-KJNodes /comfyui/custom_nodes/ComfyUI-KJNodes && break; \
+      rm -rf /comfyui/custom_nodes/ComfyUI-KJNodes; \
+      [ $i -lt 3 ] && sleep 15 || exit 1; \
+    done && \
     cd /comfyui/custom_nodes/ComfyUI-KJNodes && \
     (git checkout 33e2d3ac90e913bdec561361e1ebac7599a3de64 2>/dev/null || \
-    (git fetch origin 33e2d3ac90e913bdec561361e1ebac7599a3de64 --depth=1 && \
+    (timeout 60 git fetch origin 33e2d3ac90e913bdec561361e1ebac7599a3de64 --depth=1 && \
     git checkout 33e2d3ac90e913bdec561361e1ebac7599a3de64) || \
     echo "WARN: commit unreachable, falling back to HEAD") && \
-    pip install --no-cache-dir -r requirements.txt
+    for i in 1 2 3; do \
+      timeout 300 pip install --no-cache-dir --timeout 60 -r requirements.txt && break; \
+      [ $i -lt 3 ] && sleep 15 || exit 1; \
+    done
 
-RUN comfy node install --exit-on-fail was-ns@3.0.1 || \
-    (echo "WARN: was-ns@3.0.1 unavailable, falling back to latest" >&2 && \
-    comfy node install --exit-on-fail was-ns)
+RUN for i in 1 2 3; do \
+      timeout 120 comfy node install --exit-on-fail was-ns@3.0.1 && break; \
+      [ $i -lt 3 ] && sleep 15 || \
+      (echo "WARN: was-ns@3.0.1 unavailable, falling back to latest" >&2 && \
+       for j in 1 2 3; do \
+         timeout 120 comfy node install --exit-on-fail was-ns && break; \
+         [ $j -lt 3 ] && sleep 15 || exit 1; \
+       done); \
+    done
 
-RUN git clone https://github.com/ClownsharkBatwing/RES4LYF /comfyui/custom_nodes/RES4LYF && \
+RUN for i in 1 2 3; do \
+      timeout 120 git clone https://github.com/ClownsharkBatwing/RES4LYF /comfyui/custom_nodes/RES4LYF && break; \
+      rm -rf /comfyui/custom_nodes/RES4LYF; \
+      [ $i -lt 3 ] && sleep 15 || exit 1; \
+    done && \
     cd /comfyui/custom_nodes/RES4LYF && \
-    pip install --no-cache-dir -r requirements.txt
+    for i in 1 2 3; do \
+      timeout 300 pip install --no-cache-dir --timeout 60 -r requirements.txt && break; \
+      [ $i -lt 3 ] && sleep 15 || exit 1; \
+    done
 
 #RUN mkdir -p /comfyui/models/latent_upscale_models && \
 #    wget -q -O /comfyui/models/latent_upscale_models/ltx-2.3-spatial-upscaler-x2-1.0.safetensors \
