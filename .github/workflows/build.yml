@@ -33,5 +33,5 @@ jobs:
             ${{ secrets.DOCKERHUB_USERNAME }}/ltx23-comfyui:${{ github.sha }}
           build-args: |
             HF_TOKEN=${{ secrets.HF_TOKEN }}
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
+          #cache-from: type=gha
+          #cache-to: type=gha,mode=max
